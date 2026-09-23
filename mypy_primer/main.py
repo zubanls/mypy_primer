@@ -21,6 +21,7 @@ from mypy_primer.projects import get_projects
 from mypy_primer.type_checker import (
     setup_mypy,
     setup_pyrefly,
+    setup_zuban,
     setup_pyright,
     setup_ty,
     setup_typeshed,
@@ -54,6 +55,12 @@ def setup_type_checker(
         kwargs = {
             "repo": ARGS.repo,
             "typeshed_dir": typeshed_dir,
+            "build_profile": ARGS.cargo_profile or "release",
+        }
+    elif ARGS.type_checker == "zuban":
+        setup_fn = setup_zuban
+        kwargs = {
+            "repo": ARGS.repo,
             "build_profile": ARGS.cargo_profile or "release",
         }
     else:
